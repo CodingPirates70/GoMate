@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gomate/screens/home_screen.dart';
+import 'package:gomate/screens/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -160,7 +162,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                                },
                                 child: const Text(
                                   'Sign In',
                                   style: TextStyle(color: Colors.white),
@@ -189,7 +193,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                 children: [
                                   const Text("Don't have an Account?"),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignUpScreen()));
+                                    },
                                     child: const Text('Sign up here', style: TextStyle(color: Colors.black),),
                                   ),
                                 ],
