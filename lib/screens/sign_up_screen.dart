@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gomate/screens/home_screen.dart';
 import 'package:gomate/screens/sign_in_screen.dart';
+import 'package:gomate/services/user_services.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -12,6 +13,9 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool rememberMe = false;
+  bool isLoading = false;
+  String? errorMessage;
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -27,7 +31,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool get isPasswordValid {
     final password = _passwordController.text;
-    // At least 6 chars, one letter, one number, one special char
     return password.length >= 6 &&
         RegExp(r'[A-Za-z]').hasMatch(password) &&
         RegExp(r'[0-9]').hasMatch(password) &&
@@ -47,6 +50,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _handleSignUp() async {
+    setState(() {
+      errorMessage = null;
+    });
+
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      await UserService().register(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+        userName: _usernameController.text.trim(),
+      );
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } catch (e) {
+      setState(() {
+        errorMessage = e.toString().replaceAll('Exception:', '').trim();
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -219,8 +257,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 if (value.length < 6) {
                                   return 'Password must be at least 6 characters';
                                 }
-                                if (!RegExp(r'[A-Za-z]').hasMatch(value) || !RegExp(r'[0-9]').hasMatch(value) || !RegExp(r'[!@#\$&*~_.,%^()-]').hasMatch(value)) {
-                                  return 'Password must contain letter, number and special character';
+                                if (!RegExp(r'[A-Za-z]').hasMatch(value)) {
+                                  return 'Password must contain a letter';
+                                }
+                                if (!RegExp(r'[0-9]').hasMatch(value)) {
+                                  return 'Password must contain a number';
+                                }
+                                if (!RegExp(r'[!@#\$&*~_.,%^()-]').hasMatch(value)) {
+                                  return 'Password must contain a special character';
                                 }
                                 return null;
                               },
@@ -270,6 +314,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                             ),
                             const SizedBox(height: 16),
+                            if (errorMessage != null)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  errorMessage!,
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              ),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -280,16 +332,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                 ),
-                                onPressed: () {
-                                  if (_formKey.currentState?.validate() ?? false) {
-                                    // Handle sign up
-                                  }
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-                                },
-                                child: const Text(
-                                  'Sign up',
-                                  style: TextStyle(color: Colors.white, fontSize: 18),
-                                ),
+                                onPressed: isLoading ? null : _handleSignUp,
+                                child: isLoading
+                                    ? const SizedBox(
+                                        width: 24,
+                                        height: 24,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Sign up',
+                                        style: TextStyle(color: Colors.white, fontSize: 18),
+                                      ),
                               ),
                             ),
                             const SizedBox(height: 16),
