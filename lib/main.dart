@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gomate/screens/bottom_nav_bar.dart';
 import 'package:gomate/screens/splash_screen.dart';
 
 void main() {
@@ -19,3 +20,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
