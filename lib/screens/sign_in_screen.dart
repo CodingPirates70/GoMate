@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gomate/screens/home_screen.dart';
+import 'package:gomate/screens/travel_screen.dart';
 import 'package:gomate/screens/sign_up_screen.dart';
 import 'package:gomate/services/user_services.dart';
 
@@ -37,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     } catch (e) {
       setState(() {
@@ -61,10 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
       backgroundColor: const Color(0xFF48CAE4),
       body: SingleChildScrollView(
         child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minWidth: width,
-            minHeight: height,
-          ),
+          constraints: BoxConstraints(minWidth: width, minHeight: height),
           child: IntrinsicHeight(
             child: Stack(
               children: [
@@ -125,7 +123,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                       children: [
                                         SizedBox(
                                           height: height / 4,
-                                          child: Image.asset('assets/images/logo_blue.png', fit: BoxFit.contain),
+                                          child: Image.asset(
+                                            'assets/images/logo_blue.png',
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -136,18 +137,27 @@ class _SignInScreenState extends State<SignInScreen> {
                                   cursorColor: Colors.white,
                                   style: const TextStyle(color: Colors.white),
                                   decoration: InputDecoration(
-                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
                                     filled: true,
                                     fillColor: const Color(0xFF48CAE4),
                                     labelText: 'Email',
-                                    labelStyle: const TextStyle(color: Colors.white),
-                                    prefixIcon: const Icon(Icons.email, color: Colors.white),
+                                    labelStyle: const TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                    prefixIcon: const Icon(
+                                      Icons.email,
+                                      color: Colors.white,
+                                    ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40.0),
                                       borderSide: BorderSide.none,
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.white, width: 1.0),
+                                      borderSide: const BorderSide(
+                                        color: Colors.white,
+                                        width: 1.0,
+                                      ),
                                       borderRadius: BorderRadius.circular(40.0),
                                     ),
                                   ),
@@ -155,7 +165,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter your email';
                                     }
-                                    if (!RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(value)) {
+                                    if (!RegExp(
+                                      r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+                                    ).hasMatch(value)) {
                                       return 'Enter a valid email';
                                     }
                                     return null;
@@ -164,23 +176,38 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(height: 10),
                                 TextFormField(
                                   controller: _passwordController,
-                                  style: TextStyle(color: const Color(0xFF48CAE4).withOpacity(0.7)),
+                                  style: TextStyle(
+                                    color: const Color(
+                                      0xFF48CAE4,
+                                    ).withOpacity(0.7),
+                                  ),
                                   cursorColor: const Color(0xFF48CAE4),
                                   obscureText: true,
                                   decoration: InputDecoration(
-                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
                                     filled: true,
                                     fillColor: Colors.white,
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Color(0xFF48CAE4), width: 1.0),
+                                      borderSide: const BorderSide(
+                                        color: Color(0xFF48CAE4),
+                                        width: 1.0,
+                                      ),
                                       borderRadius: BorderRadius.circular(40.0),
                                     ),
                                     labelText: 'Password',
-                                    labelStyle: const TextStyle(color: Colors.grey),
-                                    prefixIcon: const Icon(Icons.lock, color: Colors.grey),
+                                    labelStyle: const TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                    prefixIcon: const Icon(
+                                      Icons.lock,
+                                      color: Colors.grey,
+                                    ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40.0),
-                                      borderSide: BorderSide(color: Color(0xFF48CAE4)),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFF48CAE4),
+                                      ),
                                     ),
                                   ),
                                   validator: (value) {
@@ -192,7 +219,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -224,8 +252,16 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(height: 20),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 63, 193, 220),
-                                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                                    backgroundColor: const Color.fromARGB(
+                                      255,
+                                      63,
+                                      193,
+                                      220,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 50,
+                                      vertical: 15,
+                                    ),
                                     textStyle: const TextStyle(fontSize: 18),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(40.0),
@@ -253,16 +289,25 @@ class _SignInScreenState extends State<SignInScreen> {
                                     const Text("Don't have an Account?"),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignUpScreen()));
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SignUpScreen(),
+                                          ),
+                                        );
                                       },
-                                      child: const Text('Sign up here', style: TextStyle(color: Colors.black),),
+                                      child: const Text(
+                                        'Sign up here',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

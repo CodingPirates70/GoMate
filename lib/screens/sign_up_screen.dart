@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gomate/screens/home_screen.dart';
 import 'package:gomate/screens/sign_in_screen.dart';
+import 'package:gomate/screens/travel_screen.dart';
 import 'package:gomate/services/user_services.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -20,7 +20,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool get isUsernameValid => _usernameController.text.trim().isNotEmpty;
 
@@ -72,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => TravelScreen()),
       );
     } catch (e) {
       setState(() {
@@ -116,7 +117,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return SingleChildScrollView(
-                  padding: EdgeInsets.only(left: 32.0, right: 32.0, bottom: MediaQuery.of(context).viewInsets.bottom),
+                  padding: EdgeInsets.only(
+                    left: 32.0,
+                    right: 32.0,
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       minHeight: constraints.maxHeight,
@@ -145,11 +150,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 32.0),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 32.0,
+                              ),
                               child: Center(
                                 child: SizedBox(
                                   height: height / 8,
-                                  child: Image.asset('assets/images/logo_blue.png', fit: BoxFit.contain),
+                                  child: Image.asset(
+                                    'assets/images/logo_blue.png',
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),
@@ -165,16 +175,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: _usernameController,
                               style: const TextStyle(color: Colors.black),
                               cursorColor: Color(0xFF48CAE4),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 suffixIcon: isUsernameValid
-                                    ? Icon(Icons.check_circle, color: Color(0xFF48CAE4))
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: Color(0xFF48CAE4),
+                                      )
                                     : null,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                               ),
                               onChanged: (value) {
@@ -200,23 +220,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               cursorColor: Color(0xFF48CAE4),
                               style: const TextStyle(color: Colors.black),
                               keyboardType: TextInputType.emailAddress,
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 suffixIcon: isEmailValid
-                                    ? Icon(Icons.check_circle, color: Color(0xFF48CAE4))
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: Color(0xFF48CAE4),
+                                      )
                                     : null,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your email';
                                 }
-                                if (!RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(value)) {
+                                if (!RegExp(
+                                  r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+                                ).hasMatch(value)) {
                                   return 'Enter a valid email';
                                 }
                                 return null;
@@ -238,16 +270,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               obscureText: true,
                               cursorColor: Color(0xFF48CAE4),
                               style: const TextStyle(color: Colors.black),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 suffixIcon: isPasswordValid
-                                    ? Icon(Icons.check_circle, color: Color(0xFF48CAE4))
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: Color(0xFF48CAE4),
+                                      )
                                     : null,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                               ),
                               validator: (value) {
@@ -263,7 +305,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 if (!RegExp(r'[0-9]').hasMatch(value)) {
                                   return 'Password must contain a number';
                                 }
-                                if (!RegExp(r'[!@#\$&*~_.,%^()-]').hasMatch(value)) {
+                                if (!RegExp(
+                                  r'[!@#\$&*~_.,%^()-]',
+                                ).hasMatch(value)) {
                                   return 'Password must contain a special character';
                                 }
                                 return null;
@@ -285,16 +329,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               obscureText: true,
                               cursorColor: Color(0xFF48CAE4),
                               style: const TextStyle(color: Colors.black),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 suffixIcon: isConfirmPasswordValid
-                                    ? Icon(Icons.check_circle, color: Color(0xFF48CAE4))
+                                    ? Icon(
+                                        Icons.check_circle,
+                                        color: Color(0xFF48CAE4),
+                                      )
                                     : null,
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFF48CAE4), width: 2),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF48CAE4),
+                                    width: 2,
+                                  ),
                                 ),
                               ),
                               validator: (value) {
@@ -330,7 +384,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  padding: const EdgeInsets.symmetric(vertical: 14),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                  ),
                                 ),
                                 onPressed: isLoading ? null : _handleSignUp,
                                 child: isLoading
@@ -344,7 +400,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       )
                                     : const Text(
                                         'Sign up',
-                                        style: TextStyle(color: Colors.white, fontSize: 18),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
                                       ),
                               ),
                             ),
@@ -355,9 +414,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const Text("Already have an Account?"),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SignInScreen()));
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignInScreen(),
+                                      ),
+                                    );
                                   },
-                                  child: const Text('Sign in here', style: TextStyle(color: Colors.black),),
+                                  child: const Text(
+                                    'Sign in here',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
                                 ),
                               ],
                             ),
