@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:gomate/screens/bottom_nav_bar.dart';
 import 'package:gomate/screens/sign_in_screen.dart';
 import 'package:gomate/screens/travel_screen.dart';
 import 'package:gomate/services/user_services.dart';
@@ -73,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => TravelScreen()),
+        MaterialPageRoute(builder: (context) => NavigationScreen()),
       );
     } catch (e) {
       setState(() {

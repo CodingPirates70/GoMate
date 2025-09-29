@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gomate/screens/page_screen.dart';
+import 'package:gomate/screens/start_trip_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -68,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    SizedBox(width: width * 0.07),
                     Image.asset(
                       'assets/images/logo_blue.png',
                       height: height * 0.045,
@@ -214,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => LakeParkCard()), // Navigate to LakeParkCard
+                            MaterialPageRoute(builder: (_) => LakeParkCard()),
                           );
                         },
                         child: _tripCard(
@@ -420,6 +422,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       slideValue = sliderWidth - buttonSize;
                       isSlid = true;
                     });
+                    
+                    // Add navigation delay for better UX
+                    Future.delayed(Duration(milliseconds: 200), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => StartTripScreen()),
+                      );
+                      
+                      // Reset slider after navigation
+                      setState(() {
+                        slideValue = 0.0;
+                        isSlid = false;
+                      });
+                    });
                   } else {
                     setState(() {
                       slideValue = 0.0;
@@ -435,6 +451,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                         color: Color(0xFF48CAE4),
                         borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Text(
+                          isSlid ? "Starting Trip..." : "Slide to Start Trip",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: width * 0.035,
+                          ),
+                        ),
                       ),
                     ),
                     AnimatedPositioned(
@@ -455,7 +481,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        child: Icon(Icons.arrow_forward, color: Color(0xFF48CAE4), size: width * 0.07),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: Color(0xFF48CAE4),
+                          size: width * 0.07,
+                        ),
                       ),
                     ),
                   ],

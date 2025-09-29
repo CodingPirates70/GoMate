@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gomate/screens/bottom_nav_bar.dart';
 import 'package:gomate/screens/home_screen.dart';
 import 'package:gomate/screens/travel_screen.dart';
 import 'package:gomate/screens/sign_up_screen.dart';
@@ -38,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => NavigationScreen()),
       );
     } catch (e) {
       setState(() {
