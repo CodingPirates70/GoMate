@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gomate/screens/home_screen.dart';
+import 'package:gomate/screens/map_screen.dart';
+import 'package:gomate/screens/message_screen.dart';
+import 'package:gomate/screens/page_screen.dart';
+import 'package:gomate/screens/travel_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   final int currentIndex;
@@ -77,9 +81,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
+    MapScreen(),
+    MessageScreen(),
+    TravelScreen(),
     HomeScreen(),
   ];
 

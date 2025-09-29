@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class MapScreen extends StatefulWidget {
+  const MapScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MapScreen> createState() => _MapScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Text('Home Screen'),
+        child: Text('Map Screen'),
       ),
     );
   }
